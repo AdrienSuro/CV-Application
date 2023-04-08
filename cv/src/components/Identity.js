@@ -9,24 +9,45 @@ class Identity extends Component {
   }
 
   render() {
-    return (
-      <div className="identity">
-        <h2>Identity</h2>
-        <label for="firstName">First Name : </label>
-        <input
-          type="text"
-          id="firstName"
-          placeholder={this.props.firstName}
-        ></input>
-        <FontAwesomeIcon icon={solid("plus")} onClick="{() => " />
-        <FontAwesomeIcon icon={solid("pen-to-square")} />
-        <label for="lastName">Last Name : </label>
-        <input type="text" id="lastName"></input>
-        <FontAwesomeIcon icon={solid("plus")} />
-        <FontAwesomeIcon icon={solid("pen-to-square")} />
-        {/* <i id="add" class="fa-solid fa-user" onClick={add}></i> */}
-      </div>
-    );
+    if (this.props.identityComplete === false) {
+      return (
+        <div className="identity">
+          <h2>Identity</h2>
+          <label htmlFor="firstName">First Name : </label>
+          <input
+            type="text"
+            id="firstName"
+            placeholder={this.props.firstName}
+          ></input>
+          <label htmlFor="lastName">Last Name : </label>
+          <input
+            type="text"
+            id="lastName"
+            placeholder={this.props.lastName}
+          ></input>
+          <FontAwesomeIcon
+            icon={solid("plus")}
+            id="addIcon"
+            onClick={this.props.addInput}
+          />
+        </div>
+      );
+    } else if (this.props.identityComplete === true) {
+      return (
+        <div className="identity">
+          <h2>Identity</h2>
+          <label htmlFor="firstName">First Name : </label>
+          <p>{this.props.firstName}</p>
+          <label htmlFor="lastName">Last Name : </label>
+          <p>{this.props.lastName}</p>
+          <FontAwesomeIcon
+            icon={solid("pen-to-square")}
+            id="editIcon"
+            onClick={this.props.editInput}
+          />
+        </div>
+      );
+    }
   }
 }
 

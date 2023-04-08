@@ -13,23 +13,46 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      firstName: "Lionel",
+      firstName: "",
       lastName: "",
       email: "",
       phoneNumber: "",
+      identityComplete: false,
     };
+    this.addInput = this.addInput.bind(this);
+    this.editInput = this.editInput.bind(this);
   }
 
-  addInput(field) {
-    let target = document.getElementById("field");
+  addInput() {
+    let firstNameField = document.getElementById("firstName");
+    let lastNameField = document.getElementById("lastName");
+    if (firstNameField.value === "" || lastNameField.value === "") {
+      return;
+    }
+    this.setState({
+      firstName: firstNameField.value,
+      lastName: lastNameField.value,
+      identityComplete: true,
+    });
   }
 
-  editInput(field) {}
+  editInput() {
+    this.setState({
+      identityComplete: false,
+    });
+    console.log("hi, ready to create editInput content");
+  }
 
   render() {
     return (
       <div className="app">
-        <Identity firstName={this.state.firstName} />
+        <Identity
+          firstName={this.state.firstName}
+          lastName={this.state.lastName}
+          addInput={this.addInput}
+          editInput={this.editInput}
+          identityComplete={this.state.identityComplete}
+        />
         <Experience />
         <Studies />
         <Languages />
